@@ -1,0 +1,172 @@
+FileVersion = 1
+LastConfig = "Debug"
+LastPlatform = "Win64"
+RecentFilesList = ["src\\Battle.bf", "src\\Entity\\Map\\TiledMap.bf", "src\\RTSSystem\\RTSSystem.bf", "src\\Program.bf", "src\\Entity\\RTSUnits\\RTSUnit.bf", "Disassembly", "src\\Entity\\Map\\MapLoader.bf", "c:\\Program Files\\BeefLang\\Projects\\BasicEngine\\src\\Pathfinding.bf", "src\\Entity\\Map\\TileSet.bf", "c:\\Program Files\\BeefLang\\BeefLibs\\corlib\\src\\Collections\\HashSet.bf", "Disassembly"]
+
+[MainWindow]
+X = 93
+Y = 56
+Width = 1200
+Height = 1024
+ShowKind = "Maximized"
+
+[MainDockingFrame]
+Type = "DockingFrame"
+SplitType = 2
+
+[[MainDockingFrame.DockedWidgets]]
+RequestedWidth = 250.0
+RequestedHeight = 1015.0
+SizePriority = 1015.0
+Type = "DockingFrame"
+SplitType = 2
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets]]
+RequestedWidth = 339.0
+RequestedHeight = 826.0
+SizePriority = 826.0
+Type = "DockingFrame"
+SplitType = 1
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.DockedWidgets]]
+RequestedWidth = 268.0
+RequestedHeight = 507.0
+Type = "TabbedView"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.DockedWidgets.Tabs]]
+Active = true
+TabLabel = "Workspace"
+TabWidth = 115.0
+Type = "ProjectPanel"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "Class View"
+TabWidth = 111.0
+Type = "ClassViewPanel"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.DockedWidgets]]
+IsFillWidget = true
+Permanent = true
+RequestedWidth = 1518.0
+RequestedHeight = 150.0
+SizePriority = 1518.0
+DefaultDocumentsTabbedView = true
+Type = "TabbedView"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "Program.bf"
+TabWidth = 106.0
+Type = "SourceViewPanel"
+FilePath = "src\\Program.bf"
+CursorPos = 115
+ProjectName = "EldrichDungeons"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "RTSUnit.bf"
+TabWidth = 100.0
+Type = "SourceViewPanel"
+FilePath = "src\\Entity\\RTSUnits\\RTSUnit.bf"
+CursorPos = 2318
+VertPos = 1423.1
+ProjectName = "EldrichDungeons"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "Pathfinding.bf"
+TabWidth = 120.0
+Type = "SourceViewPanel"
+FilePath = "c:\\Program Files\\BeefLang\\Projects\\BasicEngine\\src\\Pathfinding.bf"
+CursorPos = 265
+ProjectName = "BasicEngine"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.DockedWidgets.Tabs]]
+Active = true
+TabLabel = "Battle.bf"
+TabWidth = 87.0
+Type = "SourceViewPanel"
+FilePath = "src\\Battle.bf"
+CursorPos = 1108
+VertPos = 722.0
+ProjectName = "EldrichDungeons"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "MapLoader.bf"
+TabWidth = 122.0
+Type = "SourceViewPanel"
+FilePath = "src\\Entity\\Map\\MapLoader.bf"
+CursorPos = 1197
+VertPos = 967.1
+ProjectName = "EldrichDungeons"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "TiledMap.bf"
+TabWidth = 100.0
+Type = "SourceViewPanel"
+FilePath = "src\\Entity\\Map\\TiledMap.bf"
+CursorPos = 5432
+VertPos = 3024.0
+ProjectName = "EldrichDungeons"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "RTSSystem.bf"
+TabWidth = 108.0
+Type = "SourceViewPanel"
+FilePath = "src\\RTSSystem\\RTSSystem.bf"
+CursorPos = 11108
+VertPos = 7375.325
+ProjectName = "EldrichDungeons"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets]]
+RequestedWidth = 250.0
+RequestedHeight = 187.0
+Type = "TabbedView"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "Disassembly"
+TabWidth = 122.0
+Type = "DisassemblyPanel"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "Call Stack"
+TabWidth = 105.0
+Type = "CallStackPanel"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
+Active = true
+TabLabel = "Output"
+TabWidth = 90.0
+Type = "OutputPanel"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "Autocomplete"
+TabWidth = 131.0
+Type = "AutoCompletePanel"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "Find Results"
+TabWidth = 119.0
+Type = "FindResultsPanel"
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "Watch"
+TabWidth = 86.0
+Type = "WatchPanel"
+Columns = [{Width = 178.0}, {Width = 178.0}, {Width = 178.0}]
+Items = ["mSelectedUnit", ""]
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "Memory"
+TabWidth = 99.0
+Type = "MemoryPanel"
+AutoResize = "Auto_Mul8"
+RequestedWidth = 300.0
+
+[[MainDockingFrame.DockedWidgets.DockedWidgets.Tabs]]
+TabLabel = "Auto"
+TabWidth = 77.0
+Type = "AutoWatchPanel"
+Columns = [{Width = 178.0}, {Width = 625.0}, {Width = 178.0}]
+
+[[Breakpoints]]
+File = "c:\\Program Files\\BeefLang\\Projects\\BasicEngine\\src\\GameApp.bf"
+Line = 46
+Column = 3

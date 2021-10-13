@@ -1,0 +1,20 @@
+FileVersion = 1
+Dependencies = {corlib = "*", BasicEngine = "*"}
+
+[Project]
+Name = "EldrichDungeons"
+TargetType = "BeefGUIApplication"
+StartupObject = "EldrichDungeons.Program"
+
+[Configs.Debug.Win64]
+TargetDirectory = "$(WorkspaceDir)/dist"
+PostBuildCmds = ["CopyToDependents(\"$(ProjectDir)/dist/*.dll\")"]
+
+[[ProjectFolder.Items]]
+Type = "Folder"
+Name = "Commands"
+AutoInclude = true
+
+[[ProjectFolder.Items]]
+Type = "IgnoreSource"
+Name = "Simulating.bf"
