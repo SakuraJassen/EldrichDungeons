@@ -60,6 +60,7 @@ namespace EldrichDungeons.Entity.Map
 			mEntityList = new List<Entity>[(int)mMapSize.Height, (int)mMapSize.Width];
 			mTileList = new Tile[(int)mMapSize.Height, (int)mMapSize.Width];
 			mFogOfWar = new uint8[(int)mMapSize.Height, (int)mMapSize.Width];
+
 			for (int i = 0; i < mEntityList.Count; i++)
 			{
 				SafeMemberSet!(mEntityList[i], new List<Entity>());
@@ -176,6 +177,8 @@ namespace EldrichDungeons.Entity.Map
 				{
 					uint8 alpha = (uint8)Math.Remap(mFogOfWar[y, x], 0, 8, minimumAlpha, 255);
 					drawTile(mTileList[y, x].mTileImage, x, y, alpha);
+					for (var entity in mEntityList[y, x])
+						entity.mVisiable = mFogOfWar[y, x] > 0;
 				}
 			}
 
@@ -241,15 +244,6 @@ namespace EldrichDungeons.Entity.Map
 		public void UpdateFogOfWar()
 		{
 			updateFogOfWar();
-
-			for (int32 x = 0; x < mMapSize.Width; x++)
-			{
-				for (int32 y = 0; y < mMapSize.Height; y++)
-				{
-					for (var entity in mEntityList[y, x])
-						entity.mVisiable = mFogOfWar[y, x] > 0;
-				}
-			}
 		}
 
 		public override void Draw(int dt)
