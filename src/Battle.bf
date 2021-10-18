@@ -188,6 +188,12 @@ namespace EldrichDungeons
 				mRTSSystem.mMap.Init();
 				mInputDelay = 20;
 			}
+#if DEBUG
+			if (gGameApp.IsKeyDown(.B))
+			{
+				mInputDelay = 20;//breakpoint trigger
+			}
+#endif
 			if (gGameApp.IsKeyDown(.Escape))
 			{
 				mRTSSystem.CloseContextMenu();

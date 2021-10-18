@@ -1,12 +1,21 @@
 using SDL2;
 using BasicEngine.Entity;
+using System.Collections;
 
 namespace EldrichDungeons.Entity.Tiles
 {
 	class Tile : Entity
 	{
+		public Image mTileImage = null;
+		public uint8 mFogOfWar = 0;
+		public bool mIsWall = false;
+		public bool mIsWater = false;
+		public bool mIsOccupied = false;
+
+		public List<Entity> mEntities = new List<Entity>() ~ DeleteAndNullify!(_);
+
 		public this()
-		{ }
+			{ }
 
 		public this(Tile t)
 		{
@@ -15,11 +24,6 @@ namespace EldrichDungeons.Entity.Tiles
 			this.mIsWater = t.mIsWater;
 			this.mIsOccupied = t.mIsOccupied;
 		}
-
-		public Image mTileImage = null;
-		public bool mIsWall = false;
-		public bool mIsWater = false;
-		public bool mIsOccupied = false;
 
 		public bool IsWalkable
 		{

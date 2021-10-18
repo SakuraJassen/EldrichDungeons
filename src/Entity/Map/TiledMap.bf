@@ -15,8 +15,8 @@ namespace EldrichDungeons.Entity.Map
 		 // Tile size in Pixels
 		public Size2D mTileSize = new Size2D(32, 48) ~ DeleteAndNullify!(_);
 
-		public List<Entity>[,] mEntityList = null ~ DeleteContainerAndItems!(_);
-		public Tile[,] mTileList = null ~ SafeDelete!(_);
+		//public List<Entity>[,] mEntityList = null ~ DeleteContainerAndItems!(_);
+		public Tile[,] mTileList = null ~ DeleteContainerAndItems!(_);
 
 		public TileSet mTileSet = new TileSet() ~ delete _;
 
@@ -49,21 +49,22 @@ namespace EldrichDungeons.Entity.Map
 			case .Ok(let pos):
 				SafeMemberSet!(spawnPos, pos);
 			case .Err(let err):
+				Log!(err);
 			}
 
 			mMapSize.Set(loader.mMapSize);
 
-			DeleteContainerAndItems!(mEntityList);
-			SafeDelete!(mTileList);
+			//DeleteContainerAndItems!(mEntityList);
+			DeleteContainerAndItems!(mTileList);
 			SafeDelete!(mFogOfWar);
 
-			mEntityList = new List<Entity>[(int)mMapSize.Height, (int)mMapSize.Width];
+			//mEntityList = new List<Entity>[(int)mMapSize.Height, (int)mMapSize.Width];
 			mTileList = new Tile[(int)mMapSize.Height, (int)mMapSize.Width];
 			mFogOfWar = new uint8[(int)mMapSize.Height, (int)mMapSize.Width];
 
-			for (int i = 0; i < mEntityList.Count; i++)
+			for (int i = 0; i < mTileList.Count; i++)
 			{
-				SafeMemberSet!(mEntityList[i], new List<Entity>());
+				//SafeMemberSet!(mEntityList[i], new List<Entity>());
 				mFogOfWar[i] = 0;
 			}
 
@@ -111,7 +112,7 @@ namespace EldrichDungeons.Entity.Map
 					int tileId = mapLoader[y, x];
 					if (tileId == 2 && y < mMapSize.Height - 1 && mapLoader[y + 1, x] == 0)
 						tileId = 1;
-					Tile tile = mTileSet[tileId];
+					Tile tile = new Tile(mTileSet[tileId]);
 					SafeMemberSet!(mTileList[y, x], tile);
 
 					drawTile(tile.mTileImage, x, y, minimumAlpha);
@@ -177,7 +178,7 @@ namespace EldrichDungeons.Entity.Map
 				{
 					uint8 alpha = (uint8)Math.Remap(mFogOfWar[y, x], 0, 8, minimumAlpha, 255);
 					drawTile(mTileList[y, x].mTileImage, x, y, alpha);
-					for (var entity in mEntityList[y, x])
+					for (var entity in mTileList[y, x].mEntities)
 						entity.mVisiable = mFogOfWar[y, x] > 0;
 				}
 			}
@@ -190,9 +191,9 @@ namespace EldrichDungeons.Entity.Map
 			if (e == null)
 				return;
 
-			var entityList = mEntityList[(int)e.mGridPos.mY, (int)e.mGridPos.mX];
-			entityList.Remove(e);
-			mTileList[(int)e.mGridPos.mY, (int)e.mGridPos.mX].mIsOccupied = (entityList.Count == 0);
+			var tile = ref mTileList[(int)e.mGridPos.mY, (int)e.mGridPos.mX];
+			tile.mEntities.Remove(e);
+			tile.mIsOccupied = (tile.mEntities.Count != 0);
 		}
 
 		public void SetToTile(RTSUnit e, Vector2D gridPos)
@@ -200,17 +201,19 @@ namespace EldrichDungeons.Entity.Map
 			if (e == null)
 				return;
 
-			var entityList = ref mEntityList[(int)e.mGridPos.mY, (int)e.mGridPos.mX];
-			entityList.Remove(e);
+			var fromTile = ref mTileList[(int)e.mGridPos.mY, (int)e.mGridPos.mX];
+			fromTile.mEntities.Remove(e);
 
-			mTileList[(int)e.mGridPos.mY, (int)e.mGridPos.mX].mIsOccupied = (entityList.Count == 0);
+			fromTile.mIsOccupied = (fromTile.mEntities.Count != 0);
 
 			e.SetGridPos(gridPos);
 
+			var toTile = mTileList[(int)e.mGridPos.mY, (int)e.mGridPos.mX];
+
 			e.mVisiable = mFogOfWar[(int)e.mGridPos.mY, (int)e.mGridPos.mX] > 0;
 
-			mEntityList[(int)e.mGridPos.mY, (int)e.mGridPos.mX].Add(e);
-			mTileList[(int)e.mGridPos.mY, (int)e.mGridPos.mX].mIsOccupied = true;
+			toTile.mEntities.Add(e);
+			toTile.mIsOccupied = true;
 		}
 
 		public void UpdateFogOfWar(HashSet<v2d> visitedGrids)
@@ -219,13 +222,13 @@ namespace EldrichDungeons.Entity.Map
 
 			for (var gridpos in lastUpdatedPos)
 			{
-				for (var entity in mEntityList[(int)gridpos.y, (int)gridpos.x])
+				for (var entity in mTileList[(int)gridpos.y, (int)gridpos.x].mEntities)
 					entity.mVisiable = mFogOfWar[(int)gridpos.y, (int)gridpos.x] > 0;
 			}
 
 			for (var gridpos in visitedGrids)
 			{
-				for (var entity in mEntityList[(int)gridpos.y, (int)gridpos.x])
+				for (var entity in mTileList[(int)gridpos.y, (int)gridpos.x].mEntities)
 					entity.mVisiable = mFogOfWar[(int)gridpos.y, (int)gridpos.x] > 0;
 			}
 

@@ -164,7 +164,7 @@ namespace EldrichDungeons.Entity.RTSUnits
 			for (int xOffset = -1; xOffset <= 1; xOffset++)
 			{
 				int xAdjust = xOffset + x;
-				var entityList = map.mEntityList[y, xAdjust];
+				var entityList = map.mTileList[y, xAdjust].mEntities;
 				if (!entityList.Contains(me))
 					count += entityList.Count;
 			}
@@ -172,7 +172,7 @@ namespace EldrichDungeons.Entity.RTSUnits
 			for (int yOffset = -1; yOffset <= 1; yOffset++)
 			{
 				int yAdjust = yOffset + y;
-				var entityList = map.mEntityList[yAdjust, x];
+				var entityList = map.mTileList[yAdjust, x].mEntities;
 				if (!entityList.Contains(me))
 					count += entityList.Count;
 			}

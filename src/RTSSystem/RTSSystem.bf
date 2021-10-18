@@ -49,10 +49,10 @@ namespace EldrichDungeons.RTSSystem
 
 		public TiledMap mMap = new TiledMap();
 
-		public List<Entity>[,] mEntityList
+		/*public List<Entity>[,] mEntityList
 		{
 			get { return mMap.mEntityList; }
-		}
+		}*/
 		private List<RTSUnit> mParty = new List<RTSUnit>() ~ SafeDelete!(_);
 
 		public int mTurnCounter = 1;
@@ -283,7 +283,7 @@ namespace EldrichDungeons.RTSSystem
 
 		public bool AttackTile(RTSUnit e, Vector2D targetGridPos, bool attackAnimation = true)
 		{
-			var entityList = mMap.mEntityList[(int)targetGridPos.mY, (int)targetGridPos.mX];
+			var entityList = mMap.mTileList[(int)targetGridPos.mY, (int)targetGridPos.mX].mEntities;
 
 			if (entityList.Count < 1)
 			{
@@ -495,7 +495,7 @@ namespace EldrichDungeons.RTSSystem
 			{
 				for (int y < (int)mMapSize.Height)
 				{
-					for (var ent in mEntityList[y, x])
+					for (var ent in mMap.mTileList[y, x].mEntities)
 					{
 						if (ent.mIsDeleting || ent == rtsUnit)
 							@ent.Remove();
@@ -703,7 +703,7 @@ namespace EldrichDungeons.RTSSystem
 							if (xAdjust >= (int)mMapSize.Width || xAdjust < 0)
 								break;
 							if (overlayArray[y, xAdjust] <= 0 && (mMap.mTileList[y, xAdjust]).IsWalkable &&
-								(mMap.mEntityList[y, xAdjust].Count < 1 || ignoreUnits))
+								(mMap.mTileList[y, xAdjust].mEntities.Count < 1 || ignoreUnits))
 								overlayBuffer[y, xAdjust] = setValue;
 						}
 
@@ -713,7 +713,7 @@ namespace EldrichDungeons.RTSSystem
 							if (yAdjust >= (int)mMapSize.Height || yAdjust < 0)
 								break;
 							if (overlayArray[yAdjust, x] <= 0 && (mMap.mTileList[yAdjust, x]).IsWalkable &&
-								(mMap.mEntityList[yAdjust, x].Count < 1 || ignoreUnits))
+								(mMap.mTileList[yAdjust, x].mEntities.Count < 1 || ignoreUnits))
 								overlayBuffer[yAdjust, x] = setValue;
 						}
 					}
@@ -779,7 +779,7 @@ namespace EldrichDungeons.RTSSystem
 
 		public ref List<Entity> GetUnitsOnTile(Vector2D pos)
 		{
-			return ref mEntityList[(int)pos.mY, (int)pos.mX];
+			return ref mMap.mTileList[(int)pos.mY, (int)pos.mX].mEntities;
 		}
 
 //###Events
@@ -791,14 +791,16 @@ namespace EldrichDungeons.RTSSystem
 			{
 				v2d spawnPos = .(0, 0);
 				int debugCNT = 0;
+				Tile t = null;
 				repeat
 				{
 					int spawnIndex = gGameApp.mRand.Next(1, mMap.SpawnPositions.Count);
 					spawnPos = GetAndRemove!(mMap.SpawnPositions, spawnIndex);
+					t = mMap.mTileList[(int)spawnPos.y, (int)spawnPos.x];
 					Log!(debugCNT++);
 					Log!("spawnpos", spawnPos.x, spawnPos.y);
 				}
-				while (mMap.mEntityList[(int)spawnPos.y, (int)spawnPos.x].Count > 1)
+				while (t.mEntities.Count > 1)
 
 				var unit = new RTSUnit();
 				unit.SetForce(.Enemy);
